@@ -5,7 +5,7 @@ import logging
 import pika
 
 class AQEventBusSender(object):
-    __slots__ = ["_configuration","_connection","_channel","_queue","_routing_key","_exchange"]
+    __slots__ = ["_configuration","_connection","_channel","_queue","_exchange"]
 
     def __init__(self, configuration):
         """
@@ -30,21 +30,33 @@ class AQEventBusSender(object):
         self._connection.close()
     
     def send_message_to_queue(self,message,queueId):
+        """
+        Send a Json message to queueId
 
-        finalmessage = {
+        Args:
+            message (str): The JSON string to be sent
+            queueId (str): The identifier of the message queue
+
+        Returns:
+            None
+        """
+        # Customize the message object
+        message_customized_obj = {
             "data":message
         }
 
-        msg = {
+        # Create the MassTransit content object
+        masstransit_content_obj = {
             "messageType":['urn:message:'+'SaaS.NetCore.AQ.EventBus:IntegrationEvent'],
             "destinationAddress": f"amqp://{self._configuration.virtual_host}:{self._configuration.port}/{queueId}?bind=true&queue={queueId}",
-            "message":finalmessage,
+            "message":message_customized_obj,
         }
 
+        # Publish the MassTransit content to the specified queue
         self._channel.basic_publish(
             exchange=queueId,
             routing_key='',
-            body=dumps(msg)
+            body=dumps(masstransit_content_obj)
         )
         
     
