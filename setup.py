@@ -4,8 +4,8 @@ with open("app/README.md", "r") as f:
     long_description = f.read()
 
 setup(
-    name="aqeventbus3",
-    version="0.0.2",
+    name="aqeventbus",
+    version="0.0.3",
     description="AQ EventBus",
     package_dir={"": "app"},
     packages=find_packages(where="app"),
