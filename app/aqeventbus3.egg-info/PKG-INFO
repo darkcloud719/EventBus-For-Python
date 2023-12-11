@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: aqeventbus3
+Version: 0.0.2
+Summary: AQ EventBus
+Home-page: https://github.com/darkcloud719/VSCodeTest2
+Author: CSH
+Author-email: shenghuai0719@gmail.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: twine>=4.0.2; extra == "dev"
